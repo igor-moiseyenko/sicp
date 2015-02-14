@@ -6,4 +6,5 @@
   "I don't do a whole lot ... yet."
   [& args]
   (println "Hello, World!")
-  (prn (chapter1/sqrt 9)))
+  (prn (chapter1/sqrt 9))
+  (prn (chapter1/new-if (= 1 1) 0 5)))
