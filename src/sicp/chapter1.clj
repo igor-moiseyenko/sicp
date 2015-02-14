@@ -8,7 +8,7 @@
 
 (defn f [a] (sum-of-squares (+ a 1) (* a 2)))
 
-"Newton method"
+"Newton method. Block structure."
 
 (defn new-if
   "Usage of this function instead of the 'if' special form causes StackOverflow exception
@@ -18,15 +18,15 @@
   (cond predicate then-clause
         :else else-clause))
 
-(defn good-enough? [guess x] (< (Math/abs (- (square guess) x)) 0.001))
-
 (defn average [x y] (/ (+ x y) 2))
 
-(defn improve [guess x] (average guess (/ x guess)))
-
-(defn sqrt-iter [guess x]
-  (if (good-enough? guess x)
-    guess
-    (recur (improve guess x) x)))
-
-(defn sqrt [x] (sqrt-iter 1.0 x))
+(defn sqrt [x]
+  (letfn [(good-enough? [guess]
+                        (< (Math/abs (- (square guess) x)) 0.001))
+          (improve [guess]
+                   (average guess (/ x guess)))
+          (sqrt-iter [guess]
+                     (if (good-enough? guess)
+                       guess
+                       (recur (improve guess))))]
+    (sqrt-iter 1.0)))
