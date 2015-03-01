@@ -84,3 +84,12 @@
 (defn count-change
   [amount]
   (cc amount 5))
+
+"Fast exponent evaluation."
+
+(defn fast-expt
+  [a n]
+  (cond (= n 0) 1
+        (even? n) (square (fast-expt a (/ n 2)))
+        :else (* a (fast-expt a (- n 1)))))
+

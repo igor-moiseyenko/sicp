@@ -12,4 +12,5 @@
   (prn (chapter1/factorial-iteration 7))
   (prn (chapter1/fibonacci 10))
   (prn (chapter1/fibonacci-iteration 10))
-  (prn (chapter1/count-change 100)))
+  (prn (chapter1/count-change 100))
+  (prn (chapter1/fast-expt 2 10)))
