@@ -93,3 +93,28 @@
         (even? n) (square (fast-expt a (/ n 2)))
         :else (* a (fast-expt a (- n 1)))))
 
+
+"Half-interval method."
+
+(defn close-enough?
+  [x y]
+  (< (Math/abs (- x y)) 0.001))
+
+(defn search
+  [f neg-point pos-point]
+  (let [mid-point (average neg-point pos-point)]
+    (if (close-enough? neg-point pos-point)
+      mid-point
+      (let [test-value (f mid-point)]
+        (cond (pos? test-value) (search f neg-point mid-point)
+              (neg? test-value) (search f mid-point pos-point)
+              :else mid-point)))))
+
+(defn half-interval-method
+  [f a b]
+  (let [a-value (f a)
+        b-value (f b)]
+    (cond (and (neg? a-value) (pos? b-value)) (search f a b)
+          (and (neg? b-value) (pos? a-value)) (search f b a)
+          :else (prn "Error! Function values for arguments have the same sign."))))
+
