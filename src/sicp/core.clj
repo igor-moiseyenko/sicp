@@ -19,4 +19,8 @@
   (prn (chapter1/half-interval-method #(Math/sin %) 2.0 4.0))
 
   "Evaluate equation x^3 - 2x - 3 = 0 on [1.0 2.0] interval."
-  (prn (chapter1/half-interval-method #(- (Math/pow % 3) (* % 2) 3) 1.0 2.0)))
+  (prn (chapter1/half-interval-method #(- (Math/pow % 3) (* % 2) 3) 1.0 2.0))
+
+  (prn (chapter1/fixed-point #(Math/cos %) 1.0))
+  (prn (chapter1/fixed-point #(+ (Math/sin %) (Math/cos %)) 1.0))
+  (prn (chapter1/sqrt-fixed-point 9)))

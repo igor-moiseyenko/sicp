@@ -118,3 +118,22 @@
           (and (neg? b-value) (pos? a-value)) (search f b a)
           :else (prn "Error! Function values for arguments have the same sign."))))
 
+
+"Fixed point."
+
+(def tolerance 0.00001)
+
+(defn fixed-point
+  [f first-guess]
+  (letfn [(close-enough? [v1 v2]
+                         (< (Math/abs (- v1 v2)) tolerance))
+          (try-iter [guess]
+                    (let [guess-next (f guess)]
+                      (if (close-enough? guess guess-next)
+                        guess-next
+                        (recur guess-next))))]
+    (try-iter first-guess)))
+
+(defn sqrt-fixed-point
+  [x]
+  (fixed-point #(average % (/ x %)) 1.0))
